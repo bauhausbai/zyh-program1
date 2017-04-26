@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script type="text/javascript">
+		//微信授权
+		function getCookie(cname) {
+		    var name = cname + "=";
+		    var ca = document.cookie.split(';');
+		    for(var i=0; i<ca.length; i++) {
+		        var c = ca[i];
+		        while (c.charAt(0)==' ') c = c.substring(1);
+		        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+		    }
+		    return "";
+		}
+		var openId = getCookie('changhong_1104_openId');
+		if ( openId == "" ) {
+			window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx276189b7d7f1be8e&redirect_uri=http://www.hylinkcd-ad.com/active/M2016/changhong_1104_jd/server/auth.php&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+		}
+
+        if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {
+            var version = parseFloat(RegExp.$1);
+            if (version > 2.3) {
+                var phoneScale = parseInt(window.screen.width) / 640;
+                document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+            } else {
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="description" content="我正在跟超哥玩打飞机，集齐模块可换人工智能电视！玩儿着就把奖拿了！" />
+	<script>
+		document.write("<link rel='stylesheet' href='main.css?ver="+ Math.random() +" '/>");
+	</script>
+	<title>超行星听你的</title>
+</head>
+<body>
+	<!-- 主页 -->
+	<div id="page-home" class="page-home layer">
+		<img src="images/home-0.png" class="tit">
+		<div class="airship">
+			<img src="images/airship.png" class="ship">
+			<img src="images/light.png" class="light1">
+		</div>
+		<img src="images/chao.png" class="chao">
+		<div class="startgame">
+			<div class="r1 rotate1"></div>
+			<div class="r2 rotate2"></div>
+			<div class="r3"></div>
+			<img src="images/home-b1.png" style="top:4px; left:4px;" class="homebt">
+		</div>
+		<div class="personal">
+			<div class="r1 rotate1"></div>
+			<div class="r2 rotate2"></div>
+			<div class="r3"></div>
+			<img src="images/home-b3.png" style="top:-3px; left:-1px;" class="homebt">
+		</div>
+		<div class="brand">
+			<div class="r1 rotate1"></div>
+			<div class="r2 rotate2"></div>
+			<div class="r3"></div>
+			<img src="images/home-b4.png" style="top:3px; left:-2px;" class="homebt">
+		</div>
+		<div class="rule">
+			<div class="r1 rotate1"></div>
+			<div class="r2 rotate2"></div>
+			<div class="r3"></div>
+			<img src="images/home-b2.png" style="top:3px; left:-1px;" class="homebt">
+		</div>
+		
+		
+	</div>
+
+	<!-- 游戏操作说明 -->
+	<div id="page-operate" class="page-operate layer">
+		<img src="images/operate.jpg" class="bg">
+		<img src="images/operate-close.png" class="close">
+	</div>
+
+	<!-- 游戏 -->
+	<div id="page-game" class="page-game layer">
+		<section class="loading">
+	    	<div class="progress"></div>
+	  	</section>
+	  	<section class="game">
+	    	<canvas id="gameView"></canvas>
+	    	<div class="rewardTip"></div>
+		    <div class="gameOver">
+		      <!-- <div class="dialog">
+		        <div class="caption">你挂了</div>
+		        <div class="retry">再来一次</div>
+		      </div> -->
+		      	<!-- <img src="images/gameover.jpg" class="bg"> -->
+		    	<p class="score">本局得分：<span>123400</span></p>
+		    	<div class="ele-con">
+		    		<img src="images/ele-air1.png">
+		    		<img src="images/ele-air1.png">
+		    		<img src="images/ele-air1.png">
+		    	</div>
+		    	<button class="back btn-wider">返回首页</button>
+		    	<button class="retry btn-wider">再玩一次</button>
+		    	<button class="invite btn-wider">邀请好友</button>
+		    	<button class="prize btn-wider">我的奖品</button>
+		    </div>
+		      <audio id="a-bg" preload loop>
+			    <source src="snd/bg.mp3" type="audio/mp3">
+			    <source src="snd/bg.ogg" type="audio/ogg">
+			  </audio>
+	  	</section>
+	</div>
+
+	<!-- 个人中心 -->
+	<div id="page-personal" class="page-personal layer">
+		<div class="block1 block">
+			<img src="images/user-header.jpg" class="user-header">
+			<img src="images/operate-close.png" class="close">
+			<p class="user-name"></p>
+			<p class="user-score">积分:<span class="score">234500</span></p>
+		</div>
+		<div class="block2 block">
+			<div class="prize-con tv">
+				<div class="pro-img">
+					<p class="pro-name">长虹电视</p>
+				</div>
+				<ul class="elements-con">
+					<li class="el1">
+						<span class="e1">1</span>
+						<img src="images/ele-tv1.png">
+					</li>
+					<li class="el4">
+						<span class="e4">1</span>
+						<img src="images/ele-tv2.png">
+					</li>
+					<li class="el5">
+						<span class="e5">1</span>
+						<img src="images/ele-tv3.png">
+					</li>
+					<li class="el6">
+						<span class="e6">1</span>
+						<img src="images/ele-tv4.png">
+					</li>
+					<li class="el7">
+						<span class="e7">1</span>
+						<img src="images/ele-tv5.png">
+					</li>
+				</ul>
+				<button class="exchange btn">兑换奖品</button>
+				<span class="tip">点击模块可查看各亮点功能</span>
+			</div>
+		</div>
+		<div class="block3 block">
+			<div class="prize-con air">
+				<div class="pro-img">
+					<p class="pro-name">长虹空调</p>
+				</div>
+				<ul class="elements-con">
+					<li class="el3">
+						<span class="e3">1</span>
+						<img src="images/ele-air1.png">
+					</li>
+					<li class="el12">
+						<span class="e12">1</span>
+						<img src="images/ele-air2.png">
+					</li>
+					<li class="el13">
+						<span class="e13">1</span>
+						<img src="images/ele-air3.png">
+					</li>
+					<li class="el14">
+						<span class="e14">1</span>
+						<img src="images/ele-air4.png">
+					</li>
+					<li class="el15">
+						<span class="e15">1</span>
+						<img src="images/ele-air5.png">
+					</li>
+				</ul>
+				<button class="exchange btn">兑换奖品</button>
+				<span class="tip">点击模块可查看各亮点功能</span>
+			</div>
+			<div class="prize-con fridge">
+				<div class="pro-img">
+					<p class="pro-name">美菱冰箱</p>
+				</div>
+				<ul class="elements-con">
+					<li class="el2">
+						<span class="e2">1</span>
+						<img src="images/ele-fri1.png">
+					</li>
+					<li class="el8">
+						<span class="e8">1</span>
+						<img src="images/ele-fri2.png">
+					</li>
+					<li class="el9">
+						<span class="e9">1</span>
+						<img src="images/ele-fri3.png">
+					</li>
+					<li class="el10">
+						<span class="e10">1</span>
+						<img src="images/ele-fri4.png">
+					</li>
+					<li class="el11">
+						<span class="e11">1</span>
+						<img src="images/ele-fri5.png">
+					</li>
+				</ul>
+				<button class="exchange btn">兑换奖品</button>
+				<span class="tip">点击模块可查看各亮点功能</span>
+			</div>
+		</div>
+		<div class="block4 block">
+			<div class="sprize sprize1">
+				<img src="images/pri1.png" class="pro-img">
+				<span class="pro-name">长虹养生壶烧水壶</span>
+				<span class="need-score">兑换积分：2000000</span>
+				<button class="exchange btn">兑换奖品</button>
+			</div>
+		</div>
+		<div class="block5 block">
+			<div class="sprize sprize2">
+				<img src="images/pri2.png" class="pro-img">
+				<span class="pro-name">运动水杯</span>
+				<span class="need-score">兑换积分：2000000</span>
+				<button class="exchange btn">兑换奖品</button>
+			</div>
+			<div class="sprize sprize3">
+				<img src="images/pri3.png" class="pro-img">
+				<span class="pro-name">路由器</span>
+				<span class="need-score">兑换积分：2000000</span>
+				<button class="exchange btn">兑换奖品</button>
+			</div>
+		</div>
+		<div class="block6 block">
+			<img src="images/personal_06.jpg" style="position:absolute; top:0; left:0;">
+			<a href="http://wqs.jd.com/promote/2016/drawcoupon/index.html?&activeid=1104changhong&level=1" class="coupon coupon1"><img src="images/coupon_jd.png"></a>
+			<!-- <a href="http://wqs.jd.com/promote/2016/drawcoupon/index.html?&activeid=1104changhong&level=1" class="coupon coupon2"><img src="images/coupon_02.png"></a>
+			<a href="http://wqs.jd.com/promote/2016/drawcoupon/index.html?&activeid=1104changhong&level=1" class="coupon coupon3"><img src="images/coupon_03.png"></a> -->
+		</div>
+
+		<div class="login fixed-layer">
+			<div class="login-con conbg">
+				<img src="images/personal-close.png" class="close">
+				<div class="login-tit">报名兑换</div>
+				<input type="text" placeholder="姓名" class="name" id="lname">
+				<input type="text" placeholder="电话" class="phone" id="lphone">
+				<input type="text" placeholder="地址" class="address" id="laddress">
+				<p class="login-tip">*请确认您的电话、地址无误，错误视为自动放弃兑换资格</p>
+				<button class="login-sub btn-wider">立即兑换</button>
+			</div>
+		</div>
+
+		<div class="login-suc fixed-layer">
+			<div class="suc-con conbg">
+				<img src="images/personal-close.png" class="close">
+				<h3 class="congra-1">恭喜您！</h3>
+				<div class="congra-2">兑换成功</div>
+				<div class="congra-3">很高兴又一件长虹家电加入您的生活！</div>
+				<button class="btn-wider share">去告诉好朋友</button>
+			</div>
+		</div>
+
+		<div class="prize-out fixed-layer">
+			<div class="out-con conbg">
+				<img src="images/personal-close.png" class="close">
+				<img src="images/personal-act.png" class="act">
+				<p class="tip">今日奖品已领完，客官明日请早哦！</p>
+			</div>
+		</div>
+
+		<div class="ele-detail fixed-layer">
+			<div class="conbg ele-con">
+				<p class="tit">电视模块</p>
+				<img src="images/personal-close.png" class="close">
+				<img src="images/tv1_03.png" class="ele-img">
+				<P class="ele-desc">这里是模块介绍，这里是模块介绍，这里是模块介绍，这里是模块介绍</P>
+				<a class="btn-wider buy" href="">点击购买</a>
+			</div>
+		</div>
+
+
+	</div>
+
+	<!-- 品牌专区 -->
+	<div id="page-brand" class="page-brand layer">
+		<img src="images/brandbg_01.jpg">
+		<img src="images/brandbg_02.jpg">
+		<img src="images/brandbg_03.jpg">
+		<img src="images/brandbg_04.jpg">
+		<a href="http://wqs.jd.com/event/seller/brand/new/134/1000001134/174366/index.shtml?venderid=1000001134&WDSTAG=5.1000001134.0.174366" class="btn brand1">了解详情</a>
+		<a href="http://wqs.jd.com/event/seller/brand/new/134/1000001134/174366/index.shtml?venderid=1000001134&WDSTAG=5.1000001134.0.174366" class="btn brand2">了解详情</a>
+		<a href="http://m.jd.com/product/2771002.html?resourceType=jdapp_share&resourceValue=Wxfriends&utm_source=iosapp&utm_medium=appshare&utm_campaign=t_335139774&utm_term=Wxfriends" class="btn brand3">了解详情</a>
+		<a href="javascript:;" class="btn close">返回主页</a>
+	</div>
+
+	<!-- 活动规则 -->
+	<div id="page-rule" class="page-rule layer">
+		<img src="images/rulebg.jpg" class="bg">
+		<img src="images/rule-close.png" class="close">
+		<div class="title">游戏规则</div>
+		<div class="rule-con">
+			<p class="p1"><img src="images/rulenum1.png">游戏会随机掉落长虹美菱智能模块，集齐可兑换长虹智能电视、长虹空调、美菱冰箱等大奖。</p>
+			<p class="p2"><img src="images/rulenum2.png">每击落一架飞机可获积分100，积分可累计兑换各类小家电。</p>
+			<p class="p3"><img src="images/rulenum3.png">小家电每人每天有一次兑换机会，大家电在2016年11月11日0点开启兑换，兑换奖品数量有限，先到先得，兑完即止。</p>
+			<p class="p4"><img src="images/rulenum4.png">每日登陆，即获长虹电视专享优惠券</p>
+			<p class="p5"><img src="images/rulenum5.png">所有奖品在活动结束后统一邮寄，活动最终解释权归长虹美菱所有。活动时间：2016.11.4-2016.11.11。</p>
+			<P><img src="images/qr.jpg" style="vertical-align: middle; display:block;"><span style="text-indent:0;">有任何疑问请关注"长虹商城"公众号咨询在线客服！</span></P>
+		</div>
+	</div>
+
+	<!-- 优惠券 -->
+	<div id="page-coupon" class="page-coupon layer">
+		<img src="images/couponbg.jpg" class="bg">
+		<img src="images/rule-close.png" class="close">
+		<img src="images/coupon-tit.png" class="tit">
+		<img src="images/coupon-red.png" class="red1">
+		<img src="images/coupon-red.png" class="red2">
+		<img src="images/coupon-red.png" class="red3">
+		<button class="btn1">立即领取</button>
+	</div>
+
+	<!-- 分享 -->
+	<div id="page-share" class="page-share layer"></div>
+
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src='http://www.hylinkcd-ad.com/active/inc/TM_01/js/jweixin-1.0.0.js'></script>
+	<script src="js/vmouse.js"></script>
+	<script src="layer_mobile/layer.js"></script>
+	<script src="js/game.js?_dc=16"></script>
+	<script src="js/main.js?_dc=12"></script>
+	<script src="js/share.js?a=3"></script>
+
+	<div style="display:none;">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254933726'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254933726' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	</div>
+</body>
+</html>
